@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBFB | The Unified Web Language</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f13; color: #fff; line-height: 1.6; }
+        
+        /* Navigation Bar */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: bold; color: #4CAF50; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a { color: #ccc; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: #4CAF50; }
+        
+        /* Buttons */
+        .btn { padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; font-size: 15px; }
+        .btn-primary { background: #4CAF50; color: white; }
+        .btn-primary:hover { background: #45a049; }
+        .btn-outline { background: transparent; border: 1px solid #4CAF50; color: #4CAF50; }
+        .btn-outline:hover { background: rgba(76, 175, 80, 0.1); }
+        .btn-blue { background: #00d2ff; color: #000; }
+        .btn-blue:hover { background: #00b8e6; }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 100px 20px; background: radial-gradient(circle at center, #1a2a1a 0%, #0f0f13 70%); }
+        .hero h1 { font-size: 56px; margin-bottom: 20px; letter-spacing: -1px; }
+        .hero h1 span { color: #4CAF50; }
+        .hero p { font-size: 20px; color: #aaa; max-width: 600px; margin: 0 auto 40px auto; }
+        .hero-buttons { display: flex; justify-content: center; gap: 15px; }
+
+        /* Features/Apps Section */
+        .apps-section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 32px; margin-bottom: 50px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .card { background: #1e1e24; border: 1px solid #333; border-radius: 12px; padding: 30px; transition: transform 0.3s, border-color 0.3s; }
+        .card:hover { transform: translateY(-5px); border-color: #4CAF50; }
+        .card-icon { font-size: 40px; margin-bottom: 20px; }
+        .card h3 { font-size: 22px; margin-bottom: 10px; }
+        .card p { color: #888; margin-bottom: 25px; font-size: 15px; }
+
+        /* Auth Modal (Popup) */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal { background: #1e1e24; padding: 40px; border-radius: 12px; width: 400px; border: 1px solid #444; position: relative; }
+        .close-btn { position: absolute; top: 15px; right: 20px; background: none; border: none; color: #888; font-size: 24px; cursor: pointer; }
+        .close-btn:hover { color: #fff; }
+        .modal h2 { margin-bottom: 20px; text-align: center; }
+        .input-group { margin-bottom: 15px; }
+        .input-group label { display: block; margin-bottom: 5px; color: #aaa; font-size: 14px; }
+        .input-group input { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #444; background: #111; color: white; outline: none; font-size: 15px; }
+        .input-group input:focus { border-color: #4CAF50; }
+        .modal-toggle { text-align: center; margin-top: 15px; font-size: 14px; color: #aaa; cursor: pointer; }
+        .modal-toggle:hover { color: #4CAF50; text-decoration: underline; }
+        
+        /* User Profile Area */
+        #userArea { display: none; align-items: center; gap: 15px; }
+        .avatar { width: 35px; height: 35px; background: #4CAF50; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; color: white; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="#" class="logo">
+            <span style="font-size: 28px;">⚡</span> SBFB
+        </a>
+        <div class="nav-links">
+            <a href="https://sbfb0.github.io/block-code/">Block Studio</a>
+            <a href="https://sbfb0.github.io/type-code/">Type Studio</a>
+            
+            <div id="authButtons">
+                <button class="btn btn-outline" onclick="openModal('login')">Log In</button>
+                <button class="btn btn-primary" onclick="openModal('signup')">Sign Up</button>
+            </div>
+            
+            <div id="userArea">
+                <span id="welcomeText" style="color: #aaa;">Welcome, User</span>
+                <div class="avatar" id="userAvatar">U</div>
+                <button class="btn btn-outline" onclick="logout()" style="padding: 6px 12px; font-size: 13px;">Sign Out</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>The language of the <span>future</span>.</h1>
+        <p>Standard Based Frontend and Backend (SBFB). Write Python, HTML, JavaScript, and command advanced AI brains all from a single, unified syntax.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" style="font-size: 18px; padding: 15px 30px;" onclick="window.location.href='https://sbfb0.github.io/type-code/'">Start Typing Code</button>
+            <button class="btn btn-blue" style="font-size: 18px; padding: 15px 30px;" onclick="window.location.href='https://sbfb0.github.io/block-code/'">Try Block Coder</button>
+        </div>
+    </section>
+
+    <section class="apps-section">
+        <h2 class="section-title">Choose Your Environment</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div class="card-icon">🧩</div>
+                <h3>SBFB Block Studio</h3>
+                <p>Perfect for beginners. Drag and drop visual blocks to build web apps, games, and logic without typing a single semicolon.</p>
+                <button class="btn btn-primary" style="width: 100%;" onclick="window.location.href='https://sbfb0.github.io/block-code/'">Launch Block Studio</button>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">💻</div>
+                <h3>SBFB Type Studio</h3>
+                <p>The raw power of SBFB. Write fluid code, manage environments, and compile live web previews instantly in the browser.</p>
+                <button class="btn btn-outline" style="width: 100%;" onclick="window.location.href='https://sbfb0.github.io/type-code/'">Launch Type Studio</button>
+            </div>
+
+            <div class="card">
+                <div class="card-icon">🧠</div>
+                <h3>Isaahi AI Integrated</h3>
+                <p>SBFB isn't just a language; it's an agentic framework. Use the <code>tool brain ai</code> command to summon Isaahi AI directly into your projects.</p>
+                <button class="btn btn-outline" style="width: 100%; border-color: #888; color: #888; cursor: default;">Built into Studios</button>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <h2 id="modalTitle">Create an Account</h2>
+            
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="usernameInput" placeholder="Enter your username">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="passwordInput" placeholder="Enter your password">
+            </div>
+            
+            <button class="btn btn-primary" style="width: 100%; margin-top: 10px;" id="submitAuthBtn" onclick="handleAuth()">Sign Up</button>
+            
+            <div class="modal-toggle" id="modalToggle" onclick="toggleAuthMode()">
+                Already have an account? Log in here.
+            </div>
+            <div id="authMessage" style="text-align: center; margin-top: 15px; font-size: 14px; display: none; font-weight: bold;"></div>
+        </div>
+    </div>
+
+    <script>
+        // --- Authentication Logic (Using Browser LocalStorage) ---
+        let isLoginMode = false;
+
+        // Check if user is already logged in when the page loads
+        window.onload = function() {
+            checkLoginState();
+        };
+
+        function checkLoginState() {
+            const currentUser = localStorage.getItem('sbfb_current_user');
+            if (currentUser) {
+                // User is logged in! Update the UI
+                document.getElementById('authButtons').style.display = 'none';
+                document.getElementById('userArea').style.display = 'flex';
+                document.getElementById('welcomeText').innerText = `Welcome, ${currentUser}`;
+                document.getElementById('userAvatar').innerText = currentUser.charAt(0).toUpperCase();
+            } else {
+                // User is logged out
+                document.getElementById('authButtons').style.display = 'flex';
+                document.getElementById('userArea').style.display = 'none';
+            }
+        }
+
+        // Modal Controls
+        function openModal(mode) {
+            document.getElementById('authModal').style.display = 'flex';
+            document.getElementById('authMessage').style.display = 'none';
+            document.getElementById('usernameInput').value = '';
+            document.getElementById('passwordInput').value = '';
+            
+            isLoginMode = (mode === 'login');
+            updateModalUI();
+        }
+
+        function closeModal() {
+            document.getElementById('authModal').style.display = 'none';
+        }
+
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById('authMessage').style.display = 'none';
+            updateModalUI();
+        }
+
+        function updateModalUI() {
+            if (isLoginMode) {
+                document.getElementById('modalTitle').innerText = 'Log In to SBFB';
+                document.getElementById('submitAuthBtn').innerText = 'Log In';
+                document.getElementById('modalToggle').innerText = 'Need an account? Sign up here.';
+            } else {
+                document.getElementById('modalTitle').innerText = 'Create an Account';
+                document.getElementById('submitAuthBtn').innerText = 'Sign Up';
+                document.getElementById('modalToggle').innerText = 'Already have an account? Log in here.';
+            }
+        }
+
+        function showMessage(text, isError) {
+            const msgDiv = document.getElementById('authMessage');
+            msgDiv.innerText = text;
+            msgDiv.style.color = isError ? '#ff5555' : '#4CAF50';
+            msgDiv.style.display = 'block';
+        }
+
+        // Handle the actual Sign Up / Log In process
+        function handleAuth() {
+            const username = document.getElementById('usernameInput').value.trim();
+            const password = document.getElementById('passwordInput').value.trim();
+
+            if (!username || !password) {
+                showMessage("Please fill in both fields.", true);
+                return;
+            }
+
+            // Get existing users database from browser memory
+            let usersDb = JSON.parse(localStorage.getItem('sbfb_users_db')) || {};
+
+            if (isLoginMode) {
+                // LOG IN
+                if (usersDb[username] && usersDb[username] === password) {
+                    showMessage("Login successful! Redirecting...", false);
+                    localStorage.setItem('sbfb_current_user', username);
+                    setTimeout(() => {
+                        closeModal();
+                        checkLoginState();
+                    }, 1000);
+                } else {
+                    showMessage("Incorrect username or password.", true);
+                }
+            } else {
+                // SIGN UP
+                if (usersDb[username]) {
+                    showMessage("Username already exists! Try another.", true);
+                } else {
+                    // Save new user
+                    usersDb[username] = password;
+                    localStorage.setItem('sbfb_users_db', JSON.stringify(usersDb));
+                    
+                    // Auto log them in
+                    localStorage.setItem('sbfb_current_user', username);
+                    showMessage("Account created! Welcome to SBFB.", false);
+                    
+                    setTimeout(() => {
+                        closeModal();
+                        checkLoginState();
+                    }, 1500);
+                }
+            }
+        }
+
+        // Handle Sign Out
+        function logout() {
+            localStorage.removeItem('sbfb_current_user');
+            checkLoginState();
+        }
+    </script>
+</body>
+</html>
