@@ -19,24 +19,28 @@
         .btn-outline { background: transparent; border: 1px solid #4CAF50; color: #4CAF50; }
         .btn-blue { background: #00d2ff; color: #000; }
         .btn-gray { background: #333; color: #fff; border: 1px solid #444; }
-        .btn-gray:hover { background: #444; }
 
-        .hero { text-align: center; padding: 100px 20px; background: radial-gradient(circle at center, #1a2a1a 0%, #0f0f13 70%); }
+        .hero { text-align: center; padding: 80px 20px; background: radial-gradient(circle at center, #1a2a1a 0%, #0f0f13 70%); }
         .hero h1 { font-size: 56px; margin-bottom: 20px; }
         .hero h1 span { color: #4CAF50; }
         .hero p { font-size: 20px; color: #aaa; max-width: 600px; margin: 0 auto 40px auto; }
         .hero-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
 
-        .apps-section { padding: 80px 50px; max-width: 1200px; margin: 0 auto; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: #1e1e24; border: 1px solid #333; border-radius: 12px; padding: 30px; transition: 0.3s; text-align: center; }
-        .card:hover { border-color: #4CAF50; transform: translateY(-5px); }
-        .card-icon { font-size: 40px; margin-bottom: 20px; }
+        .section-container { padding: 60px 50px; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: 32px; margin-bottom: 30px; border-left: 5px solid #4CAF50; padding-left: 15px; }
 
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; }
-        .modal { background: #1e1e24; padding: 40px; border-radius: 12px; width: 400px; border: 1px solid #444; }
-        #userArea { display: none; align-items: center; gap: 15px; }
-        .avatar { width: 35px; height: 35px; background: #4CAF50; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; }
+        /* Project Gallery Grid */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
+        .project-card { background: #1e1e24; border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
+        .project-card:hover { transform: translateY(-5px); border-color: #00d2ff; }
+        .project-img { width: 100%; height: 180px; background: #2a2a32; display: flex; justify-content: center; align-items: center; font-size: 50px; }
+        .project-info { padding: 20px; }
+        .project-info h3 { margin-bottom: 8px; color: #00d2ff; }
+        .project-info p { font-size: 14px; color: #bbb; margin-bottom: 15px; height: 45px; overflow: hidden; }
+        .tag { font-size: 11px; background: #333; padding: 3px 8px; border-radius: 4px; color: #4CAF50; text-transform: uppercase; margin-right: 5px; }
+
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
+        .modal { background: #1e1e24; padding: 40px; border-radius: 12px; width: 450px; border: 1px solid #444; }
     </style>
 </head>
 <body>
@@ -47,88 +51,109 @@
             <a href="/docs/">Docs</a>
             <a href="/block-code/">Block Studio</a>
             <a href="/type-code/">Type Studio</a>
-            
-            <div id="authButtons">
-                <button class="btn btn-outline" onclick="openModal('login')">Log In</button>
-            </div>
             <div id="userArea">
-                <div class="avatar" id="userAvatar">U</div>
-                <button class="btn btn-outline" onclick="logout()">Sign Out</button>
+                <span id="welcomeMsg" style="color:#aaa; font-size:14px;"></span>
+                <button class="btn btn-outline" onclick="logout()" style="padding:5px 10px;">Sign Out</button>
             </div>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>Code without <span>limits</span>.</h1>
-        <p>The first unified language for Frontend, Backend, and AI Agents.</p>
+        <h1>SBFB <span>Gallery</span></h1>
+        <p>Explore the amazing apps, games, and AI agents built by the SBFB community.</p>
         <div class="hero-buttons">
-            <a href="/type-code/" class="btn btn-primary">Type Code</a>
-            <a href="/block-code/" class="btn btn-blue">Block Coder</a>
-            <a href="/docs/" class="btn btn-gray">Read Docs</a>
+            <button class="btn btn-primary" onclick="openSubmitModal()">+ Submit Your Project</button>
+            <a href="/type-code/" class="btn btn-gray">Start Coding</a>
         </div>
     </section>
 
-    <section class="apps-section">
-        <div class="grid">
-            <div class="card">
-                <div class="card-icon">📚</div>
-                <h3>Documentation</h3>
-                <p>Learn how to master SBFB commands, variables, and loops.</p>
-                <a href="/docs/" class="btn btn-outline" style="width:100%; margin-top:10px;">Explore Docs</a>
+    <div class="section-container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="gallery-grid">
+            
+            <div class="project-card">
+                <div class="project-img">🏎️</div>
+                <div class="project-info">
+                    <span class="tag">Game</span><span class="tag">Frontend</span>
+                    <h3>SBFB Turbo</h3>
+                    <p>A fast-paced retro racing game built using SBFB's native HTML5 canvas injection.</p>
+                    <a href="/block-code/" class="btn btn-outline" style="width:100%; margin-top:10px;">View Code</a>
+                </div>
             </div>
-            <div class="card">
-                <div class="card-icon">🧩</div>
-                <h3>Visual Coding</h3>
-                <p>Drag and drop logic to build apps instantly.</p>
-                <a href="/block-code/" class="btn btn-outline" style="width:100%; margin-top:10px;">Open Blocks</a>
-            </div>
-            <div class="card">
-                <div class="card-icon">🧠</div>
-                <h3>AI Agentic Tools</h3>
-                <p>Integrate Isaahi AI into your projects with one command.</p>
-                <a href="/docs/#ai-brain" class="btn btn-outline" style="width:100%; margin-top:10px;">Learn AI</a>
-            </div>
-        </div>
-    </section>
 
-    <div class="modal-overlay" id="authModal">
+            <div class="project-card">
+                <div class="project-img">🖥️</div>
+                <div class="project-info">
+                    <span class="tag">OS</span><span class="tag">JS</span>
+                    <h3>SBFB Desktop OS</h3>
+                    <p>A fully functional web-based operating system with windows, a taskbar, and a live clock.</p>
+                    <a href="/type-code/" class="btn btn-outline" style="width:100%; margin-top:10px;">Launch App</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-img">🤖</div>
+                <div class="project-info">
+                    <span class="tag">AI</span><span class="tag">Agent</span>
+                    <h3>Isaahi Assistant</h3>
+                    <p>An intelligent AI chatbot that uses SBFB's agentic tools to crawl the web.</p>
+                    <a href="/docs/#ai-brain" class="btn btn-outline" style="width:100%; margin-top:10px;">Learn More</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="submitModal">
         <div class="modal">
-            <h2 id="modalTitle" style="margin-bottom:20px;">Welcome</h2>
-            <input type="text" id="usernameInput" placeholder="Username" style="width:100%; padding:10px; margin-bottom:10px; background:#111; color:white; border:1px solid #444;">
-            <input type="password" id="passwordInput" placeholder="Password" style="width:100%; padding:10px; margin-bottom:20px; background:#111; color:white; border:1px solid #444;">
-            <button class="btn btn-primary" style="width:100%;" onclick="handleAuth()">Submit</button>
-            <button class="btn" style="width:100%; margin-top:10px; color:#aaa;" onclick="closeModal()">Cancel</button>
+            <h2 style="margin-bottom:10px; color:#4CAF50;">Submit Project</h2>
+            <p style="color:#aaa; font-size:14px; margin-bottom:20px;">Share your SBFB creation with the world!</p>
+            
+            <input type="text" id="projTitle" placeholder="Project Title" style="width:100%; padding:10px; margin-bottom:10px; background:#111; color:white; border:1px solid #444; border-radius:5px;">
+            <textarea id="projDesc" placeholder="Brief description..." style="width:100%; padding:10px; margin-bottom:20px; background:#111; color:white; border:1px solid #444; border-radius:5px; height:80px;"></textarea>
+            
+            <button class="btn btn-primary" style="width:100%;" onclick="submitProject()">Post to Gallery</button>
+            <button class="btn" style="width:100%; margin-top:10px; color:#aaa;" onclick="closeSubmitModal()">Cancel</button>
         </div>
     </div>
 
     <script>
-        // Auth Logic
-        function checkLoginState() {
+        function checkLogin() {
             const user = localStorage.getItem('sbfb_current_user');
             if (user) {
-                document.getElementById('authButtons').style.display = 'none';
-                document.getElementById('userArea').style.display = 'flex';
-                document.getElementById('userAvatar').innerText = user.charAt(0).toUpperCase();
+                document.getElementById('welcomeMsg').innerText = "Hi, " + user + " | ";
+                document.getElementById('userArea').style.display = "block";
             } else {
-                document.getElementById('authButtons').style.display = 'flex';
-                document.getElementById('userArea').style.display = 'none';
+                document.getElementById('userArea').style.display = "none";
             }
         }
-        function openModal() { document.getElementById('authModal').style.display = 'flex'; }
-        function closeModal() { document.getElementById('authModal').style.display = 'none'; }
-        function handleAuth() {
-            const user = document.getElementById('usernameInput').value;
-            if(user) {
-                localStorage.setItem('sbfb_current_user', user);
-                checkLoginState();
-                closeModal();
+
+        function openSubmitModal() {
+            if (!localStorage.getItem('sbfb_current_user')) {
+                alert("Please log in on the homepage to submit projects!");
+                return;
+            }
+            document.getElementById('submitModal').style.display = 'flex';
+        }
+
+        function closeSubmitModal() {
+            document.getElementById('submitModal').style.display = 'none';
+        }
+
+        function submitProject() {
+            const title = document.getElementById('projTitle').value;
+            if(title) {
+                alert("Project '" + title + "' submitted for review! It will appear here soon.");
+                closeSubmitModal();
             }
         }
+
         function logout() {
             localStorage.removeItem('sbfb_current_user');
-            checkLoginState();
+            location.reload();
         }
-        window.onload = checkLoginState;
+
+        window.onload = checkLogin;
     </script>
 </body>
 </html>
