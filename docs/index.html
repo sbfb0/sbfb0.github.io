@@ -1,122 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SBFB Documentation</title>
+    <title>SBFB Docs</title>
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f13; color: #d4d4d4; display: flex; line-height: 1.6; }
-        
-        /* Top Navbar */
-        header { position: fixed; top: 0; width: 100%; height: 60px; background: rgba(15, 15, 19, 0.95); border-bottom: 1px solid #333; display: flex; align-items: center; padding: 0 30px; z-index: 1000; }
-        header a { color: #4CAF50; text-decoration: none; font-size: 20px; font-weight: bold; display: flex; align-items: center; gap: 10px; }
-        
-        /* Sidebar Navigation */
-        .sidebar { position: fixed; top: 60px; left: 0; width: 250px; height: calc(100vh - 60px); background: #15151a; border-right: 1px solid #333; padding: 20px; overflow-y: auto; }
-        .sidebar h3 { color: #fff; font-size: 14px; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; margin-top: 20px; }
-        .sidebar ul { list-style: none; }
-        .sidebar li { margin-bottom: 8px; }
-        .sidebar a { color: #aaa; text-decoration: none; font-size: 15px; transition: 0.2s; display: block; padding: 5px 10px; border-radius: 4px; }
-        .sidebar a:hover { background: #222; color: #4CAF50; }
-        
-        /* Main Content */
-        .content { margin-left: 250px; margin-top: 60px; padding: 50px; max-width: 900px; flex: 1; }
-        h1 { color: #fff; font-size: 40px; margin-bottom: 10px; }
-        h2 { color: #fff; font-size: 28px; margin-top: 40px; margin-bottom: 15px; border-bottom: 1px solid #333; padding-bottom: 10px; }
-        p { margin-bottom: 20px; font-size: 16px; color: #bbb; }
-        
-        /* Code Blocks */
-        pre { background: #1e1e24; padding: 20px; border-radius: 8px; border: 1px solid #333; overflow-x: auto; margin-bottom: 25px; }
-        code { font-family: 'Courier New', Courier, monospace; font-size: 15px; }
-        .keyword { color: #ff79c6; }
-        .string { color: #f1fa8c; }
-        .function { color: #50fa7b; }
-        
-        .inline-code { background: #222; padding: 3px 6px; border-radius: 4px; font-family: monospace; color: #ffb86c; font-size: 14px; }
-        
-        .note { background: rgba(0, 210, 255, 0.1); border-left: 4px solid #00d2ff; padding: 15px; border-radius: 0 8px 8px 0; margin-bottom: 20px; }
-        .note strong { color: #00d2ff; }
+        body { font-family: sans-serif; background: #0f0f13; color: #ccc; padding: 50px; line-height: 1.6; }
+        h1, h2 { color: #4CAF50; }
+        pre { background: #1e1e24; padding: 20px; border-radius: 8px; color: #ffb86c; border: 1px solid #333; }
+        .nav { margin-bottom: 40px; }
+        .nav a { color: #00d2ff; text-decoration: none; margin-right: 20px; }
     </style>
 </head>
 <body>
-
-    <header>
-        <a href="https://sbfb0.github.io/"><span>⚡</span> SBFB Docs</a>
-    </header>
-
-    <div class="sidebar">
-        <h3>Basics</h3>
-        <ul>
-            <li><a href="#getting-started">Getting Started</a></li>
-            <li><a href="#environments">Environments</a></li>
-            <li><a href="#printing">Printing Output</a></li>
-        </ul>
-        <h3>Logic</h3>
-        <ul>
-            <li><a href="#variables">Variables & Math</a></li>
-            <li><a href="#loops">Repeat Loops</a></li>
-        </ul>
-        <h3>Integrations</h3>
-        <ul>
-            <li><a href="#web-scripts">HTML & JS</a></li>
-            <li><a href="#python">Python Mode</a></li>
-        </ul>
-        <h3>Agentic AI</h3>
-        <ul>
-            <li><a href="#ai-brain">Isaahi AI Brain</a></li>
-        </ul>
+    <div class="nav">
+        <a href="/">← Back Home</a>
+        <a href="/type-code/">Try Studio</a>
     </div>
+    <h1>SBFB Documentation</h1>
+    <p>SBFB is a unified language for web apps and AI.</p>
+    
+    <h2>Basic Print</h2>
+    <pre>type ("Hello World")</pre>
+    
+    <h2>Variables</h2>
+    <pre>let name = "Creator"
+type (name)</pre>
 
-    <div class="content">
-        <h1>SBFB Documentation</h1>
-        <p>Welcome to the official documentation for <strong>Standard Based Frontend and Backend (SBFB)</strong>. SBFB is a unified scripting language that compiles HTML, JavaScript, Python, and agentic AI tools into a single, cohesive syntax.</p>
-
-        <div class="note">
-            <strong>Note:</strong> You can test all of these commands live using the <a href="https://sbfb0.github.io/type-code/" style="color: #00d2ff; text-decoration: none;">SBFB Type Studio</a>!
-        </div>
-
-        <h2 id="getting-started">Getting Started</h2>
-        <p>Every SBFB script must begin and end with the core initialization tags.</p>
-<pre><code><span class="keyword">start:SBFB</span>
-<span class="comment">// Your code goes here</span>
-<span class="keyword">&lt;end:SBFB&gt;</span></code></pre>
-
-        <h2 id="environments">Environments</h2>
-        <p>SBFB allows you to declare the environment your code is running in:</p>
-        <ul>
-            <li style="margin-bottom: 10px;"><span class="inline-code">frontend</span> - Optimizes for web output.</li>
-            <li style="margin-bottom: 10px;"><span class="inline-code">backend</span> - Optimizes for server/logic output.</li>
-            <li style="margin-bottom: 10px;"><span class="inline-code">idk</span> - Auto-detect the environment.</li>
-        </ul>
-
-        <h2 id="printing">Printing Output</h2>
-<pre><code><span class="function">type</span> (<span class="string">"Hello, World!"</span>)</code></pre>
-
-        <h2 id="variables">Variables & Math</h2>
-<pre><code><span class="keyword">let</span> score = <span class="string">10</span>
-<span class="keyword">let</span> finalScore = score + <span class="string">50</span>
-<span class="function">type</span> (finalScore)</code></pre>
-
-        <h2 id="loops">Repeat Loops</h2>
-<pre><code><span class="keyword">repeat</span> <span class="string">5</span> {
-    <span class="function">type</span> (<span class="string">"Looping..."</span>)
-}</code></pre>
-
-        <h2 id="web-scripts">HTML & JavaScript</h2>
-<pre><code><span class="keyword">insert html</span> (index.html)
-&lt;h1&gt;Hello!&lt;/h1&gt;
-<span class="keyword">end:insert</span></code></pre>
-
-        <h2 id="ai-brain">Isaahi AI Brain</h2>
-<pre><code><span class="function">set_api_key</span> <span class="string">"YOUR_KEY"</span>
-<span class="keyword">insert:tool brain ai</span>
-{
-You are Isaahi AI.
-}</code></pre>
-
-        <br><br><br>
-    </div>
-
+    <h2>Loops</h2>
+    <pre>repeat 5 {
+  type ("Looping...")
+}</pre>
 </body>
 </html>
