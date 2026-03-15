@@ -6,154 +6,66 @@
     <title>SBFB | The Unified Web Language</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #0f0f13; color: #fff; line-height: 1.6; }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
-        .logo { font-size: 24px; font-weight: bold; color: #4CAF50; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0f0f13; color: #fff; line-height: 1.6; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background: rgba(0,0,0,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #333; }
+        .logo { font-size: 24px; font-weight: bold; color: #4CAF50; text-decoration: none; }
         .nav-links { display: flex; gap: 20px; align-items: center; }
-        .nav-links a { color: #ccc; text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a { color: #ccc; text-decoration: none; transition: 0.3s; }
         .nav-links a:hover { color: #4CAF50; }
-        
-        .btn { padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; transition: 0.3s; font-size: 15px; text-decoration: none; display: inline-block; }
+        .btn { padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer; border: none; text-decoration: none; display: inline-block; transition: 0.3s; }
         .btn-primary { background: #4CAF50; color: white; }
         .btn-outline { background: transparent; border: 1px solid #4CAF50; color: #4CAF50; }
-        .btn-blue { background: #00d2ff; color: #000; }
-        .btn-gray { background: #333; color: #fff; border: 1px solid #444; }
-
         .hero { text-align: center; padding: 80px 20px; background: radial-gradient(circle at center, #1a2a1a 0%, #0f0f13 70%); }
         .hero h1 { font-size: 56px; margin-bottom: 20px; }
-        .hero h1 span { color: #4CAF50; }
-        .hero p { font-size: 20px; color: #aaa; max-width: 600px; margin: 0 auto 40px auto; }
-        .hero-buttons { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-
+        .hero span { color: #4CAF50; }
         .section-container { padding: 60px 50px; max-width: 1200px; margin: 0 auto; }
-        .section-title { font-size: 32px; margin-bottom: 30px; border-left: 5px solid #4CAF50; padding-left: 15px; }
-
-        /* Project Gallery Grid */
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
         .project-card { background: #1e1e24; border-radius: 12px; overflow: hidden; border: 1px solid #333; transition: 0.3s; }
         .project-card:hover { transform: translateY(-5px); border-color: #00d2ff; }
-        .project-img { width: 100%; height: 180px; background: #2a2a32; display: flex; justify-content: center; align-items: center; font-size: 50px; }
+        .project-img { width: 100%; height: 150px; background: #2a2a32; display: flex; justify-content: center; align-items: center; font-size: 50px; }
         .project-info { padding: 20px; }
-        .project-info h3 { margin-bottom: 8px; color: #00d2ff; }
-        .project-info p { font-size: 14px; color: #bbb; margin-bottom: 15px; height: 45px; overflow: hidden; }
-        .tag { font-size: 11px; background: #333; padding: 3px 8px; border-radius: 4px; color: #4CAF50; text-transform: uppercase; margin-right: 5px; }
-
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 1000; justify-content: center; align-items: center; }
-        .modal { background: #1e1e24; padding: 40px; border-radius: 12px; width: 450px; border: 1px solid #444; }
     </style>
 </head>
 <body>
-
     <nav>
         <a href="/" class="logo">⚡ SBFB</a>
         <div class="nav-links">
             <a href="/docs/">Docs</a>
             <a href="/block-code/">Block Studio</a>
             <a href="/type-code/">Type Studio</a>
-            <div id="userArea">
-                <span id="welcomeMsg" style="color:#aaa; font-size:14px;"></span>
-                <button class="btn btn-outline" onclick="logout()" style="padding:5px 10px;">Sign Out</button>
-            </div>
         </div>
     </nav>
 
     <section class="hero">
-        <h1>SBFB <span>Gallery</span></h1>
-        <p>Explore the amazing apps, games, and AI agents built by the SBFB community.</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="openSubmitModal()">+ Submit Your Project</button>
-            <a href="/type-code/" class="btn btn-gray">Start Coding</a>
+        <h1>SBFB <span>Hub</span></h1>
+        <p>The first unified language for Frontend, Backend, and AI Agents.</p>
+        <div style="margin-top: 30px; display: flex; justify-content: center; gap: 15px;">
+            <a href="/type-code/" class="btn btn-primary">Open Studio</a>
+            <a href="/docs/" class="btn btn-outline">Read Docs</a>
         </div>
     </section>
 
     <div class="section-container">
-        <h2 class="section-title">Featured Projects</h2>
+        <h2 style="margin-bottom: 30px;">Featured Projects</h2>
         <div class="gallery-grid">
-            
             <div class="project-card">
                 <div class="project-img">🏎️</div>
                 <div class="project-info">
-                    <span class="tag">Game</span><span class="tag">Frontend</span>
                     <h3>SBFB Turbo</h3>
-                    <p>A fast-paced retro racing game built using SBFB's native HTML5 canvas injection.</p>
-                    <a href="/block-code/" class="btn btn-outline" style="width:100%; margin-top:10px;">View Code</a>
+                    <p style="color:#aaa; font-size:14px; margin-bottom:15px;">A retro racing game.</p>
+                    <a href="/type-code/?code=start%3ASBFB%0Afrontend%0Atype(%22Loading%20Turbo...%22)%0Ainsert%20html%20(g.html)%0A%3Ch1%3ERacing%20Game%3C%2Fh1%3E%0Aend%3Ainsert%0A%3Cend%3A-SBFB%3E" class="btn btn-primary" style="width:100%;">Launch Game</a>
                 </div>
             </div>
-
-            <div class="project-card">
-                <div class="project-img">🖥️</div>
-                <div class="project-info">
-                    <span class="tag">OS</span><span class="tag">JS</span>
-                    <h3>SBFB Desktop OS</h3>
-                    <p>A fully functional web-based operating system with windows, a taskbar, and a live clock.</p>
-                    <a href="/type-code/" class="btn btn-outline" style="width:100%; margin-top:10px;">Launch App</a>
-                </div>
-            </div>
-
+            
             <div class="project-card">
                 <div class="project-img">🤖</div>
                 <div class="project-info">
-                    <span class="tag">AI</span><span class="tag">Agent</span>
-                    <h3>Isaahi Assistant</h3>
-                    <p>An intelligent AI chatbot that uses SBFB's agentic tools to crawl the web.</p>
-                    <a href="/docs/#ai-brain" class="btn btn-outline" style="width:100%; margin-top:10px;">Learn More</a>
+                    <h3>Isaahi AI</h3>
+                    <p style="color:#aaa; font-size:14px; margin-bottom:15px;">Smart AI Agent interface.</p>
+                    <a href="/type-code/?code=start%3ASBFB%0Ainsert%3Atool%20brain%20ai%0A%7B%0Ayou%20are%20a%20helpful%20AI.%0A%7D%0A%3Cend%3ASBFB%3E" class="btn btn-primary" style="width:100%;">Talk to AI</a>
                 </div>
             </div>
-
         </div>
     </div>
-
-    <div class="modal-overlay" id="submitModal">
-        <div class="modal">
-            <h2 style="margin-bottom:10px; color:#4CAF50;">Submit Project</h2>
-            <p style="color:#aaa; font-size:14px; margin-bottom:20px;">Share your SBFB creation with the world!</p>
-            
-            <input type="text" id="projTitle" placeholder="Project Title" style="width:100%; padding:10px; margin-bottom:10px; background:#111; color:white; border:1px solid #444; border-radius:5px;">
-            <textarea id="projDesc" placeholder="Brief description..." style="width:100%; padding:10px; margin-bottom:20px; background:#111; color:white; border:1px solid #444; border-radius:5px; height:80px;"></textarea>
-            
-            <button class="btn btn-primary" style="width:100%;" onclick="submitProject()">Post to Gallery</button>
-            <button class="btn" style="width:100%; margin-top:10px; color:#aaa;" onclick="closeSubmitModal()">Cancel</button>
-        </div>
-    </div>
-
-    <script>
-        function checkLogin() {
-            const user = localStorage.getItem('sbfb_current_user');
-            if (user) {
-                document.getElementById('welcomeMsg').innerText = "Hi, " + user + " | ";
-                document.getElementById('userArea').style.display = "block";
-            } else {
-                document.getElementById('userArea').style.display = "none";
-            }
-        }
-
-        function openSubmitModal() {
-            if (!localStorage.getItem('sbfb_current_user')) {
-                alert("Please log in on the homepage to submit projects!");
-                return;
-            }
-            document.getElementById('submitModal').style.display = 'flex';
-        }
-
-        function closeSubmitModal() {
-            document.getElementById('submitModal').style.display = 'none';
-        }
-
-        function submitProject() {
-            const title = document.getElementById('projTitle').value;
-            if(title) {
-                alert("Project '" + title + "' submitted for review! It will appear here soon.");
-                closeSubmitModal();
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('sbfb_current_user');
-            location.reload();
-        }
-
-        window.onload = checkLogin;
-    </script>
 </body>
 </html>
